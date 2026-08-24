@@ -1,0 +1,651 @@
+/* ===================== Tokens ===================== */
+:root {
+  --bg: #f5f2ee;
+  --surface: #ffffff;
+  --surface-alt: #f0eae7;
+  --border: #e6ddd7;
+  --text: #221f26;
+  --text-muted: #6b6470;
+  --accent: #c8394a;
+  --accent-dark: #a52c3b;
+  --accent-soft: rgba(200, 57, 74, 0.12);
+  --success: #2f9e58;
+  --success-soft: rgba(47, 158, 88, 0.14);
+  --warning: #c98a1f;
+  --warning-soft: rgba(201, 138, 31, 0.14);
+  --error: #c8394a;
+  --error-soft: rgba(200, 57, 74, 0.12);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 6px 20px rgba(40, 24, 24, 0.08);
+  --shadow-sm: 0 2px 8px rgba(40, 24, 24, 0.06);
+  --font-ui: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-jp: 'Noto Sans JP', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15121a;
+    --surface: #1f1b26;
+    --surface-alt: #272130;
+    --border: #362f3f;
+    --text: #f2eef6;
+    --text-muted: #a99fb3;
+    --accent: #ef6577;
+    --accent-dark: #d6455a;
+    --accent-soft: rgba(239, 101, 119, 0.18);
+    --success: #4cc47f;
+    --success-soft: rgba(76, 196, 127, 0.16);
+    --warning: #e0a83f;
+    --warning-soft: rgba(224, 168, 63, 0.18);
+    --error: #ef6577;
+    --error-soft: rgba(239, 101, 119, 0.18);
+    --shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2 {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ===================== Header ===================== */
+.app-header {
+  background: linear-gradient(135deg, #2a1f3d 0%, #6b1f33 55%, #c8394a 100%);
+  color: #fff;
+  padding: 2rem 1.25rem 3.25rem;
+}
+
+.brand {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-mark {
+  font-family: var(--font-jp);
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-md);
+  padding: 0.4rem 0.65rem;
+  flex-shrink: 0;
+}
+
+.brand h1 {
+  font-size: 1.5rem;
+}
+
+.tagline {
+  margin: 0.15rem 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+}
+
+/* ===================== Tab nav ===================== */
+.tab-nav {
+  max-width: 960px;
+  margin: -2.25rem auto 0;
+  padding: 0 1.25rem;
+  display: flex;
+  gap: 0.5rem;
+  position: sticky;
+  top: 0.75rem;
+  z-index: 10;
+}
+
+.tab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.85rem 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+}
+
+.tab-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.tab-btn:active {
+  transform: scale(0.98);
+}
+
+.tab-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ===================== Main / panels ===================== */
+.app-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.75rem 1.25rem 3rem;
+}
+
+.tab-panel {
+  display: none;
+  animation: fade-in 0.2s ease;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-head h2 {
+  font-size: 1.3rem;
+}
+
+.panel-desc {
+  margin: 0.25rem 0 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+/* ===================== Chips ===================== */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.chip.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+/* ===================== Study tab ===================== */
+.study-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#study-search {
+  flex: 1;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+#study-search:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.study-count {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.kana-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+  gap: 0.6rem;
+}
+
+.kana-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.85rem 0.4rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.12s ease, border-color 0.15s ease;
+}
+
+.kana-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.kana-card:active {
+  transform: scale(0.96);
+}
+
+.kana-char {
+  font-family: var(--font-jp);
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.kana-romaji {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: lowercase;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem 0;
+}
+
+/* ===================== Quiz tab ===================== */
+.quiz-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.quiz-stats {
+  display: flex;
+  gap: 2rem;
+  align-self: stretch;
+  justify-content: center;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stat-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.quiz-char-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.quiz-char {
+  font-family: var(--font-jp);
+  font-size: 4.5rem;
+  font-weight: 500;
+  line-height: 1;
+  min-height: 1.2em;
+}
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.option-btn {
+  padding: 0.9rem 0.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 48px;
+  transition: all 0.12s ease;
+}
+
+.option-btn:not(:disabled):hover {
+  border-color: var(--accent);
+}
+
+.option-btn.correct {
+  background: var(--success-soft);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.option-btn.incorrect {
+  background: var(--error-soft);
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.option-btn:disabled {
+  cursor: default;
+  opacity: 0.9;
+}
+
+.quiz-feedback {
+  min-height: 1.2em;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.quiz-feedback.correct {
+  color: var(--success);
+}
+
+.quiz-feedback.incorrect {
+  color: var(--error);
+}
+
+/* ===================== Buttons ===================== */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+  transition: transform 0.1s ease, opacity 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+}
+
+.btn-ghost {
+  background: var(--surface-alt);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ===================== Writing tab ===================== */
+.writing-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex: 1;
+  min-width: 200px;
+}
+
+.field select {
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-jp);
+  font-size: 0.95rem;
+}
+
+.romaji-badge {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.romaji-badge strong {
+  color: var(--accent);
+  text-transform: lowercase;
+}
+
+.canvas-wrapper {
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--border);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s ease;
+}
+
+.canvas-wrapper.accuracy-good {
+  border-color: var(--success);
+  border-style: solid;
+}
+
+.canvas-wrapper.accuracy-mid {
+  border-color: var(--warning);
+  border-style: solid;
+}
+
+.canvas-wrapper.accuracy-low {
+  border-color: var(--error);
+  border-style: solid;
+}
+
+#writing-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none; /* evita scroll/zoom del navegador mientras se dibuja */
+  cursor: crosshair;
+}
+
+.writing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.accuracy-meter {
+  max-width: 460px;
+  margin: 1rem auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.accuracy-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.accuracy-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: var(--text-muted);
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.accuracy-fill.accuracy-good {
+  background: var(--success);
+}
+
+.accuracy-fill.accuracy-mid {
+  background: var(--warning);
+}
+
+.accuracy-fill.accuracy-low {
+  background: var(--error);
+}
+
+.accuracy-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ===================== Footer ===================== */
+.app-footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 1.5rem 1rem 2.5rem;
+}
+
+/* ===================== Responsive ===================== */
+@media (max-width: 560px) {
+  .app-header {
+    padding: 1.5rem 1rem 2.75rem;
+  }
+
+  .brand-mark {
+    font-size: 2.1rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .brand h1 {
+    font-size: 1.2rem;
+  }
+
+  .tab-btn span {
+    display: none;
+  }
+
+  .tab-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .quiz-char {
+    font-size: 3.5rem;
+  }
+
+  .quiz-options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 640px) {
+  .kana-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  }
+}
