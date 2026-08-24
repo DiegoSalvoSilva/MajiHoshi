@@ -437,6 +437,67 @@ h1, h2 {
   color: var(--error);
 }
 
+/* ===================== Vocab tab ===================== */
+.vocab-visual {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.vocab-visual-icon {
+  background: var(--surface-alt);
+  color: var(--accent);
+}
+
+.vocab-visual-icon svg {
+  width: 60px;
+  height: 60px;
+}
+
+.vocab-visual-color {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.vocab-meaning {
+  min-height: 1.3em;
+  font-family: var(--font-jp);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.vocab-input-row {
+  display: flex;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.vocab-input-row input {
+  flex: 1;
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  min-height: 48px;
+}
+
+.vocab-input-row input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.vocab-input-row input:disabled {
+  opacity: 0.75;
+}
+
 /* ===================== Buttons ===================== */
 .btn {
   padding: 0.75rem 1.5rem;

@@ -46,6 +46,14 @@
       </svg>
       <span>Escritura</span>
     </button>
+    <button class="tab-btn" data-tab="panel-vocab" role="tab" aria-selected="false" aria-controls="panel-vocab">
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="8.5" cy="10" r="1.6" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M4 16.5l4.5-4.5 3 3 4-4.5 5.5 5.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <span>Vocabulario</span>
+    </button>
   </nav>
 
   <main class="app-main">
@@ -128,6 +136,44 @@
         <button id="canvas-random" type="button" class="btn btn-ghost">Carácter aleatorio</button>
         <button id="canvas-undo" type="button" class="btn btn-ghost">Deshacer</button>
         <button id="canvas-clear" type="button" class="btn btn-primary">Limpiar</button>
+      </div>
+    </section>
+
+    <!-- 4. PESTAÑA DE VOCABULARIO -->
+    <section id="panel-vocab" class="tab-panel" role="tabpanel" aria-labelledby="panel-vocab">
+      <div class="panel-head">
+        <h2>Vocabulario ilustrado</h2>
+        <p class="panel-desc">Escribe en romaji la lectura de la palabra que representa la imagen.</p>
+      </div>
+
+      <div id="vocab-filters" class="chip-row"></div>
+
+      <div class="quiz-card">
+        <div class="quiz-stats">
+          <div class="stat"><span class="stat-label">Aciertos</span><span id="vocab-score" class="stat-value">0 / 0</span></div>
+          <div class="stat"><span class="stat-label">Racha</span><span id="vocab-streak" class="stat-value">0</span></div>
+        </div>
+
+        <div id="vocab-visual" class="vocab-visual"></div>
+        <p id="vocab-meaning" class="vocab-meaning"></p>
+
+        <div class="vocab-input-row">
+          <input
+            id="vocab-input"
+            type="text"
+            inputmode="latin"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="Escribe en romaji…"
+            aria-label="Escribe la lectura en romaji"
+          />
+          <button id="vocab-submit" type="button" class="btn btn-primary">Comprobar</button>
+        </div>
+
+        <p id="vocab-feedback" class="quiz-feedback" role="status" aria-live="polite"></p>
+
+        <button id="vocab-next" type="button" class="btn btn-primary" hidden>Siguiente →</button>
       </div>
     </section>
   </main>

@@ -98,14 +98,32 @@ export function initCanvas() {
     redraw();
   }
 
+  /**
+   * Calcula un tamaño de fuente que quepa dentro de `boxSize`, y lo deja
+   * seteado en `context.font`. Necesario porque los caracteres combinados
+   * (yōon, p. ej. びゃ) son en realidad 2 glifos: a tamaño fijo (0.7× el
+   * canvas) el texto termina siendo más ancho que el propio canvas y se
+   * recorta. Se mide con measureText a un tamaño de referencia y se reescala
+   * proporcionalmente si no entra.
+   */
+  function setFittedFont(context, text, boxSize, baseRatio = 0.7) {
+    const baseSize = boxSize * baseRatio;
+    context.font = `${Math.round(baseSize)}px "Noto Sans JP", sans-serif`;
+    const width = context.measureText(text).width;
+    const maxWidth = boxSize * 0.82;
+    if (width > maxWidth) {
+      context.font = `${Math.round(baseSize * (maxWidth / width))}px "Noto Sans JP", sans-serif`;
+    }
+  }
+
   function drawGuide() {
     ctx.clearRect(0, 0, cssSize, cssSize);
     ctx.save();
     ctx.globalAlpha = 0.14;
     ctx.fillStyle = guideColor;
-    ctx.font = `${Math.round(cssSize * 0.7)}px "Noto Sans JP", sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
+    setFittedFont(ctx, current.char, cssSize, 0.7);
     ctx.fillText(current.char, cssSize / 2, cssSize / 2);
     ctx.restore();
   }
@@ -142,7 +160,7 @@ export function initCanvas() {
     evalCtx.fillStyle = '#000';
     evalCtx.textAlign = 'center';
     evalCtx.textBaseline = 'middle';
-    evalCtx.font = `${Math.round(EVAL_SIZE * 0.72)}px "Noto Sans JP", sans-serif`;
+    setFittedFont(evalCtx, current.char, EVAL_SIZE, 0.72);
     evalCtx.fillText(current.char, EVAL_SIZE / 2, EVAL_SIZE / 2);
     return evalCtx.getImageData(0, 0, EVAL_SIZE, EVAL_SIZE).data;
   }
