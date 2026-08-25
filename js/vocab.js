@@ -11,6 +11,7 @@ import { randomItem, speak } from './utils.js';
  * alternativas como "si"/"shi").
  */
 export function initVocab() {
+  const hiraganaEl = document.getElementById('vocab-hiragana');
   const visualEl = document.getElementById('vocab-visual');
   const meaningEl = document.getElementById('vocab-meaning');
   const input = document.getElementById('vocab-input');
@@ -54,12 +55,20 @@ export function initVocab() {
   function renderVisual(item) {
     visualEl.innerHTML = '';
     visualEl.className = 'vocab-visual';
+    visualEl.style.background = '';
+
     if (item.visual.type === 'color') {
       visualEl.classList.add('vocab-visual-color');
       visualEl.style.background = item.visual.hex;
+    } else if (item.visual.type === 'image') {
+      visualEl.classList.add('vocab-visual-image');
+      const img = document.createElement('img');
+      img.src = item.visual.src;
+      img.alt = item.visual.alt || item.meaning || '';
+      img.loading = 'lazy';
+      visualEl.appendChild(img);
     } else {
       visualEl.classList.add('vocab-visual-icon');
-      visualEl.style.background = '';
       visualEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">${item.visual.svg}</svg>`;
     }
   }
@@ -76,6 +85,7 @@ export function initVocab() {
 
     const available = pool();
     current = randomItem(available);
+    hiraganaEl.textContent = current.hiragana;
     renderVisual(current);
     input.focus();
   }
@@ -101,7 +111,7 @@ export function initVocab() {
       feedbackEl.classList.add('incorrect');
     }
 
-    meaningEl.textContent = `${current.hiragana} · ${current.romaji} — “${current.meaning}”`;
+    meaningEl.textContent = `${current.romaji} — “${current.meaning}”`;
     input.disabled = true;
     submitBtn.hidden = true;
     updateScore();

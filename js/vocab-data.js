@@ -50,6 +50,15 @@ function color(hex) {
   return { type: 'color', hex };
 }
 
+/**
+ * Para usar una foto real en vez de un ícono dibujado: descárgala a
+ * assets/vocab/<archivo>.jpg y usa image('assets/vocab/<archivo>.jpg', 'texto alternativo').
+ * Debe ser una ruta local del repo (no una URL externa), ver README para detalles.
+ */
+function image(src, alt) {
+  return { type: 'image', src, alt };
+}
+
 export const VOCAB = [
   // --- básico (solo gojūon) ---
   { hiragana: 'はな', romaji: 'hana', meaning: 'flor', group: 'basic', visual: icon('flower') },
