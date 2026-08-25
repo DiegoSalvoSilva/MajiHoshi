@@ -40,6 +40,8 @@ const ICONS = {
     '<circle cx="6" cy="17" r="3.2" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="18" cy="17" r="3.2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M6 17l4.5-8h4L12 17M10.5 9H8.5M14.5 9l3 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
   camera:
     '<rect x="3" y="7.5" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M8 7.5l1.3-2.2h5.4L16 7.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" fill="none"/><circle cx="12" cy="13.5" r="3.3" stroke="currentColor" stroke-width="1.5" fill="none"/>',
+  photo:
+    '<rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="8.5" cy="10" r="1.6" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M4 16.5l4.5-4.5 3 3 4-4.5 5.5 5.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" fill="none"/>',
 };
 
 function icon(name) {
@@ -59,28 +61,71 @@ function image(src, alt) {
   return { type: 'image', src, alt };
 }
 
+/** Ilustración de OpenMoji ya descargada en assets/vocab/<romaji>.svg (ver README). */
+function openmoji(romaji, alt) {
+  return { type: 'image', src: `assets/vocab/${romaji}.svg`, alt };
+}
+
 export const VOCAB = [
   // --- básico (solo gojūon) ---
   { hiragana: 'はな', romaji: 'hana', meaning: 'flor', group: 'basic', visual: icon('flower') },
   { hiragana: 'あお', romaji: 'ao', meaning: 'azul', group: 'basic', visual: color('#2f6fed') },
   { hiragana: 'やま', romaji: 'yama', meaning: 'montaña', group: 'basic', visual: icon('mountain') },
   { hiragana: 'みず', romaji: 'mizu', meaning: 'agua', group: 'basic', visual: icon('waterDrop') },
+  // usa tu foto assets/vocab/inu.png (se detecta sola); inu.svg queda de respaldo
+  { hiragana: 'いぬ', romaji: 'inu', meaning: 'perro', group: 'basic', visual: icon('photo') },
+  { hiragana: 'ねこ', romaji: 'neko', meaning: 'gato', group: 'basic', visual: openmoji('neko', 'Gato') },
+  { hiragana: 'とり', romaji: 'tori', meaning: 'pájaro', group: 'basic', visual: openmoji('tori', 'Pájaro') },
+  { hiragana: 'さかな', romaji: 'sakana', meaning: 'pez', group: 'basic', visual: openmoji('sakana', 'Pez') },
+  { hiragana: 'たいよう', romaji: 'taiyou', meaning: 'sol', group: 'basic', visual: openmoji('taiyou', 'Sol') },
+  { hiragana: 'つき', romaji: 'tsuki', meaning: 'luna', group: 'basic', visual: openmoji('tsuki', 'Luna') },
+  { hiragana: 'ほし', romaji: 'hoshi', meaning: 'estrella', group: 'basic', visual: openmoji('hoshi', 'Estrella') },
+  { hiragana: 'あめ', romaji: 'ame', meaning: 'lluvia', group: 'basic', visual: openmoji('ame', 'Lluvia') },
+  // usa tu foto assets/vocab/yuki.jpg (se detecta sola); yuki.svg queda de respaldo
+  { hiragana: 'ゆき', romaji: 'yuki', meaning: 'nieve', group: 'basic', visual: icon('photo') },
+  // las siguientes 4 usan tus fotos en assets/vocab/<romaji>.{jpg,png,webp} (se detectan solas)
+  { hiragana: 'さくら', romaji: 'sakura', meaning: 'cerezo (flor)', group: 'basic', visual: icon('photo') },
+  { hiragana: 'すいか', romaji: 'suika', meaning: 'sandía', group: 'basic', visual: icon('photo') },
+  { hiragana: 'ひまわり', romaji: 'himawari', meaning: 'girasol', group: 'basic', visual: icon('photo') },
+  { hiragana: 'うるさい', romaji: 'urusai', meaning: 'ruidoso / ¡cállate!', group: 'basic', visual: icon('photo') },
+  { hiragana: 'き', romaji: 'ki', meaning: 'árbol', group: 'basic', visual: openmoji('ki', 'Árbol') },
+  { hiragana: 'うみ', romaji: 'umi', meaning: 'mar', group: 'basic', visual: openmoji('umi', 'Mar') },
+  { hiragana: 'そら', romaji: 'sora', meaning: 'cielo', group: 'basic', visual: openmoji('sora', 'Cielo') },
+  { hiragana: 'くるま', romaji: 'kuruma', meaning: 'auto', group: 'basic', visual: openmoji('kuruma', 'Auto') },
+  { hiragana: 'いえ', romaji: 'ie', meaning: 'casa', group: 'basic', visual: openmoji('ie', 'Casa') },
+  { hiragana: 'て', romaji: 'te', meaning: 'mano', group: 'basic', visual: openmoji('te', 'Mano') },
+  { hiragana: 'め', romaji: 'me', meaning: 'ojo', group: 'basic', visual: openmoji('me', 'Ojo') },
+  { hiragana: 'くち', romaji: 'kuchi', meaning: 'boca', group: 'basic', visual: openmoji('kuchi', 'Boca') },
+  { hiragana: 'くま', romaji: 'kuma', meaning: 'oso', group: 'basic', visual: openmoji('kuma', 'Oso') },
 
   // --- dakuten ---
   { hiragana: 'りんご', romaji: 'ringo', meaning: 'manzana', group: 'dakuten', visual: icon('apple') },
   { hiragana: 'みどり', romaji: 'midori', meaning: 'verde', group: 'dakuten', visual: color('#2f9e58') },
   { hiragana: 'かぜ', romaji: 'kaze', meaning: 'viento', group: 'dakuten', visual: icon('wind') },
   { hiragana: 'ぼうし', romaji: 'boushi', meaning: 'sombrero', group: 'dakuten', visual: icon('hat') },
+  { hiragana: 'たまご', romaji: 'tamago', meaning: 'huevo', group: 'dakuten', visual: openmoji('tamago', 'Huevo') },
+  { hiragana: 'うさぎ', romaji: 'usagi', meaning: 'conejo', group: 'dakuten', visual: openmoji('usagi', 'Conejo') },
+  { hiragana: 'ぞう', romaji: 'zou', meaning: 'elefante', group: 'dakuten', visual: openmoji('zou', 'Elefante') },
 
   // --- handakuten ---
   { hiragana: 'ぱん', romaji: 'pan', meaning: 'pan', group: 'handakuten', visual: icon('bread') },
   { hiragana: 'えんぴつ', romaji: 'enpitsu', meaning: 'lápiz', group: 'handakuten', visual: icon('pencil') },
   { hiragana: 'たんぽぽ', romaji: 'tanpopo', meaning: 'diente de león', group: 'handakuten', visual: icon('dandelion') },
   { hiragana: 'ぱんだ', romaji: 'panda', meaning: 'panda', group: 'handakuten', visual: icon('panda') },
+  { hiragana: 'かんぱい', romaji: 'kanpai', meaning: '¡salud! (brindis)', group: 'handakuten', visual: openmoji('kanpai', 'Brindis') },
+  { hiragana: 'さんぽ', romaji: 'sanpo', meaning: 'paseo', group: 'handakuten', visual: openmoji('sanpo', 'Paseo') },
 
   // --- yōon (combinados) ---
   { hiragana: 'ちゃいろ', romaji: 'chairo', meaning: 'marrón', group: 'yoon', visual: color('#8a5a34') },
   { hiragana: 'きゅうり', romaji: 'kyuuri', meaning: 'pepino', group: 'yoon', visual: icon('cucumber') },
   { hiragana: 'じてんしゃ', romaji: 'jitensha', meaning: 'bicicleta', group: 'yoon', visual: icon('bicycle') },
   { hiragana: 'しゃしん', romaji: 'shashin', meaning: 'foto', group: 'yoon', visual: icon('camera') },
+  { hiragana: 'ぎゅうにゅう', romaji: 'gyunyuu', meaning: 'leche', group: 'yoon', visual: openmoji('gyunyuu', 'Leche') },
+  { hiragana: 'おちゃ', romaji: 'ocha', meaning: 'té', group: 'yoon', visual: openmoji('ocha', 'Té') },
+  { hiragana: 'りょこう', romaji: 'ryokou', meaning: 'viaje', group: 'yoon', visual: openmoji('ryokou', 'Viaje') },
+  { hiragana: 'きょうしつ', romaji: 'kyoushitsu', meaning: 'salón de clases', group: 'yoon', visual: openmoji('kyoushitsu', 'Salón de clases') },
+  { hiragana: 'ひゃく', romaji: 'hyaku', meaning: 'cien', group: 'yoon', visual: openmoji('hyaku', 'Cien') },
+  { hiragana: 'びょういん', romaji: 'byouin', meaning: 'hospital', group: 'yoon', visual: openmoji('byouin', 'Hospital') },
+  // usa tu foto assets/vocab/densha.jpg (se detecta sola)
+  { hiragana: 'でんしゃ', romaji: 'densha', meaning: 'tren', group: 'yoon', visual: icon('photo') },
 ];

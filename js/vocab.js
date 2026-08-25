@@ -83,7 +83,7 @@ export function initVocab() {
    * el romaji de la palabra (p. ej. hana.jpg para はな).
    */
   function tryPhotoOverlay(item) {
-    const extensions = ['jpg', 'jpeg', 'png', 'webp'];
+    const extensions = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
     const img = document.createElement('img');
     img.alt = '';
     img.loading = 'lazy';

@@ -46,7 +46,7 @@ assets/vocab/hana.jpg     → はな (flor)
 assets/vocab/yama.png     → やま (montaña)
 ```
 
-Extensiones soportadas (en este orden de búsqueda): `.jpg`, `.jpeg`, `.png`, `.webp`.
+Extensiones soportadas (en este orden de búsqueda): `.jpg`, `.jpeg`, `.png`, `.webp`, `.svg`.
 Si el archivo no existe, se sigue mostrando el ícono normalmente — no rompe nada.
 
 Usa fotos de bancos de licencia libre sin atribución obligatoria, como
@@ -54,3 +54,11 @@ Usa fotos de bancos de licencia libre sin atribución obligatoria, como
 [Unsplash](https://unsplash.com), y guárdalas directamente en el repo (no enlaces
 externos) — el `Content-Security-Policy` en `vercel.json` solo permite imágenes
 del propio sitio.
+
+Buena parte del vocabulario ya usa ilustraciones de
+[OpenMoji](https://openmoji.org) (licencia CC BY-SA 4.0, atribución requerida
+— créditos en el footer de la app) descargadas a `assets/vocab/*.svg`. Para
+palabras nuevas puedes seguir el mismo patrón: buscar el emoji correspondiente
+en openmoji.org, copiar su código Unicode, y descargar
+`https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/black/svg/<CODIGO>.svg`
+como `assets/vocab/<romaji>.svg`.
