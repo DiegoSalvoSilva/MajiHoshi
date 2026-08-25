@@ -446,6 +446,8 @@ h1, h2 {
 }
 
 .vocab-visual {
+  position: relative;
+  overflow: hidden;
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -454,6 +456,20 @@ h1, h2 {
   justify-content: center;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
+}
+
+.vocab-visual-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.vocab-visual-has-photo .vocab-visual-photo {
+  opacity: 1;
 }
 
 .vocab-visual-icon {

@@ -9,6 +9,7 @@ HTML/CSS/JS puro (ES Modules), sin frameworks ni build step.
 ```
 ├── index.html
 ├── css/style.css
+├── assets/vocab/  # fotos del vocabulario ilustrado (ver abajo)
 └── js/
     ├── app.js         # punto de entrada
     ├── data.js        # dataset de hiragana (gojūon/dakuten/handakuten/yōon)
@@ -32,3 +33,24 @@ npx serve .
 ```
 
 Luego abrir `http://localhost:8000`.
+
+## Fotos del vocabulario ilustrado
+
+Las palabras de `js/vocab-data.js` se muestran por defecto con un ícono dibujado
+o una muestra de color. Para reemplazar alguna por una foto real, basta con
+poner el archivo en `assets/vocab/` nombrado igual que el **romaji** de la
+palabra — la app la detecta sola, sin tocar código:
+
+```
+assets/vocab/hana.jpg     → はな (flor)
+assets/vocab/yama.png     → やま (montaña)
+```
+
+Extensiones soportadas (en este orden de búsqueda): `.jpg`, `.jpeg`, `.png`, `.webp`.
+Si el archivo no existe, se sigue mostrando el ícono normalmente — no rompe nada.
+
+Usa fotos de bancos de licencia libre sin atribución obligatoria, como
+[Pexels](https://www.pexels.com), [Pixabay](https://pixabay.com) o
+[Unsplash](https://unsplash.com), y guárdalas directamente en el repo (no enlaces
+externos) — el `Content-Security-Policy` en `vercel.json` solo permite imágenes
+del propio sitio.

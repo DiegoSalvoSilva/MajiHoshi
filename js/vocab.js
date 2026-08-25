@@ -67,10 +67,45 @@ export function initVocab() {
       img.alt = item.visual.alt || item.meaning || '';
       img.loading = 'lazy';
       visualEl.appendChild(img);
+      return; // ya es una imagen explícita, no hace falta buscar foto por convención
     } else {
       visualEl.classList.add('vocab-visual-icon');
       visualEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">${item.visual.svg}</svg>`;
     }
+
+    tryPhotoOverlay(item);
+  }
+
+  /**
+   * Busca assets/vocab/<romaji>.{jpg,jpeg,png,webp} y, si existe, la
+   * superpone al ícono/color por defecto. Así se pueden ir agregando fotos
+   * a la carpeta sin tocar el dataset: basta con nombrar el archivo como
+   * el romaji de la palabra (p. ej. hana.jpg para はな).
+   */
+  function tryPhotoOverlay(item) {
+    const extensions = ['jpg', 'jpeg', 'png', 'webp'];
+    const img = document.createElement('img');
+    img.alt = '';
+    img.loading = 'lazy';
+    img.className = 'vocab-visual-photo';
+    let attempt = 0;
+
+    img.addEventListener('error', () => {
+      if (!img.isConnected) return; // la pregunta ya cambió, ignorar respuesta tardía
+      attempt += 1;
+      if (attempt < extensions.length) {
+        img.src = `assets/vocab/${item.romaji}.${extensions[attempt]}`;
+      } else {
+        img.remove();
+      }
+    });
+    img.addEventListener('load', () => {
+      if (!img.isConnected) return;
+      visualEl.classList.add('vocab-visual-has-photo');
+    });
+
+    img.src = `assets/vocab/${item.romaji}.${extensions[0]}`;
+    visualEl.appendChild(img);
   }
 
   function newQuestion() {
