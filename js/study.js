@@ -1,4 +1,5 @@
-import { HIRAGANA, GROUPS } from './data.js';
+import { GROUPS } from './data.js';
+import { getKana } from './script.js';
 import { speak } from './utils.js';
 
 /**
@@ -31,7 +32,7 @@ export function initStudy() {
 
   function render() {
     const query = searchInput.value.trim().toLowerCase();
-    const filtered = HIRAGANA.filter((item) => {
+    const filtered = getKana().filter((item) => {
       const matchesGroup = activeGroup === 'all' || item.group === activeGroup;
       const matchesQuery = !query || item.char.includes(query) || item.romaji.includes(query);
       return matchesGroup && matchesQuery;
@@ -58,5 +59,6 @@ export function initStudy() {
   }
 
   searchInput.addEventListener('input', render);
+  document.addEventListener('script:changed', render);
   render();
 }

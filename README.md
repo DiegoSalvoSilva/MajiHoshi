@@ -1,6 +1,6 @@
 # MajiHoshi
 
-Mini SPA para aprender Hiragana japonés: tabla de referencia, quiz de opción múltiple, vocabulario ilustrado y práctica de trazo en canvas con feedback de precisión.
+Mini SPA para aprender Hiragana y Katakana japonés (selector en la cabecera): tabla de referencia, quiz de opción múltiple, vocabulario ilustrado y práctica de trazo en canvas con feedback de precisión.
 
 HTML/CSS/JS puro (ES Modules), sin frameworks ni build step.
 
@@ -12,7 +12,8 @@ HTML/CSS/JS puro (ES Modules), sin frameworks ni build step.
 ├── assets/vocab/  # fotos del vocabulario ilustrado (ver abajo)
 └── js/
     ├── app.js         # punto de entrada
-    ├── data.js        # dataset de hiragana (gojūon/dakuten/handakuten/yōon)
+    ├── data.js        # dataset de hiragana (gojūon/dakuten/handakuten/yōon) + katakana derivado
+    ├── script.js      # silabario activo (hiragana/katakana) y su selector
     ├── vocab-data.js  # dataset de vocabulario ilustrado (íconos/colores)
     ├── utils.js       # helpers compartidos
     ├── tabs.js        # navegación entre pestañas

@@ -1,4 +1,5 @@
-import { HIRAGANA, GROUPS } from './data.js';
+import { GROUPS } from './data.js';
+import { getKana } from './script.js';
 import { randomItem, debounce } from './utils.js';
 
 /**
@@ -46,7 +47,7 @@ export function initCanvas() {
   const strokeColor = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#c8394a';
   const guideColor = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#221f26';
 
-  let current = HIRAGANA[0];
+  let current = getKana()[0];
   let strokes = [];
   let activeStroke = null;
   let drawing = false;
@@ -62,10 +63,11 @@ export function initCanvas() {
   setCurrent(current.char, { resetSelect: true });
 
   function populateSelect() {
+    select.innerHTML = '';
     GROUPS.forEach((group) => {
       const optgroup = document.createElement('optgroup');
       optgroup.label = group.label;
-      HIRAGANA.filter((item) => item.group === group.id).forEach((item) => {
+      getKana().filter((item) => item.group === group.id).forEach((item) => {
         const option = document.createElement('option');
         option.value = item.char;
         option.textContent = `${item.char}  —  ${item.romaji}`;
@@ -76,7 +78,8 @@ export function initCanvas() {
   }
 
   function setCurrent(char, { resetSelect = false } = {}) {
-    current = HIRAGANA.find((item) => item.char === char) || HIRAGANA[0];
+    const kana = getKana();
+    current = kana.find((item) => item.char === char) || kana[0];
     if (resetSelect) select.value = current.char;
     romajiLabel.textContent = current.romaji;
     strokes = [];
@@ -286,7 +289,15 @@ export function initCanvas() {
   canvas.addEventListener('touchcancel', endStroke);
 
   select.addEventListener('change', () => setCurrent(select.value));
-  randomBtn.addEventListener('click', () => setCurrent(randomItem(HIRAGANA).char, { resetSelect: true }));
+  randomBtn.addEventListener('click', () => setCurrent(randomItem(getKana()).char, { resetSelect: true }));
+
+  // Al cambiar de silabario se conserva el mismo carácter (p. ej. か → カ)
+  // buscándolo por su posición en el dataset, ya que ambos comparten orden.
+  document.addEventListener('script:changed', () => {
+    const index = select.selectedIndex;
+    populateSelect();
+    setCurrent(getKana()[Math.max(index, 0)].char, { resetSelect: true });
+  });
   undoBtn.addEventListener('click', () => {
     strokes.pop();
     redraw();

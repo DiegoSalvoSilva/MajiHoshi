@@ -1,4 +1,5 @@
-import { HIRAGANA, GROUPS } from './data.js';
+import { GROUPS } from './data.js';
+import { getKana } from './script.js';
 import { shuffle, randomItem, speak } from './utils.js';
 
 /**
@@ -44,7 +45,7 @@ export function initQuiz() {
   });
 
   function pool() {
-    return HIRAGANA.filter((item) => activeGroups.has(item.group));
+    return getKana().filter((item) => activeGroups.has(item.group));
   }
 
   function newQuestion() {
@@ -106,6 +107,7 @@ export function initQuiz() {
   }
 
   nextBtn.addEventListener('click', newQuestion);
+  document.addEventListener('script:changed', newQuestion);
   speakBtn.addEventListener('click', () => current && speak(current.char));
 
   newQuestion();

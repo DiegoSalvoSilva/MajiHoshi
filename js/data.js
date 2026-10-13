@@ -1,5 +1,5 @@
 /**
- * Dataset completo de Hiragana: gojūon (básico), dakuten, handakuten y yōon (combinados).
+ * Dataset completo de Hiragana (y Katakana, derivado de él): gojūon (básico), dakuten, handakuten y yōon (combinados).
  * Cada entrada: { char, romaji, group }
  */
 
@@ -51,3 +51,20 @@ const raw = {
 export const HIRAGANA = Object.entries(raw).flatMap(([group, list]) =>
   list.map(([char, romaji]) => ({ char, romaji, group }))
 );
+
+/**
+ * Katakana: cada hiragana tiene su equivalente katakana exactamente 0x60
+ * posiciones más adelante en Unicode (あ U+3042 → ア U+30A2), incluidos
+ * los pequeños ゃゅょ y los dakuten, así que se genera por conversión en
+ * lugar de duplicar el dataset a mano.
+ */
+function toKatakana(text) {
+  return Array.from(text, (ch) => String.fromCharCode(ch.charCodeAt(0) + 0x60)).join('');
+}
+
+export const KATAKANA = HIRAGANA.map((item) => ({ ...item, char: toKatakana(item.char) }));
+
+export const SCRIPTS = {
+  hiragana: { id: 'hiragana', label: 'Hiragana', mark: 'あ', data: HIRAGANA },
+  katakana: { id: 'katakana', label: 'Katakana', mark: 'ア', data: KATAKANA },
+};

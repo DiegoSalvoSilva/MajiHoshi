@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MajiHoshi — Aprende Hiragana</title>
-<meta name="description" content="MajiHoshi: aprende, practica y escribe hiragana japonés de forma interactiva." />
+<title>MajiHoshi — Aprende Hiragana y Katakana</title>
+<meta name="description" content="MajiHoshi: aprende, practica y escribe hiragana y katakana japonés de forma interactiva." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -16,10 +16,18 @@
 <body>
   <header class="app-header">
     <div class="brand">
-      <span class="brand-mark" aria-hidden="true">あ</span>
+      <span id="brand-mark" class="brand-mark" aria-hidden="true">あ</span>
       <div>
         <h1>MajiHoshi</h1>
-        <p class="tagline">Aprende, practica y escribe hiragana</p>
+        <p class="tagline">Aprende, practica y escribe hiragana y katakana</p>
+      </div>
+      <div class="script-toggle" role="group" aria-label="Silabario">
+        <button type="button" class="script-btn active" data-script="hiragana" aria-pressed="true">
+          <span class="script-kana" aria-hidden="true">あ</span> Hiragana
+        </button>
+        <button type="button" class="script-btn" data-script="katakana" aria-pressed="false">
+          <span class="script-kana" aria-hidden="true">ア</span> Katakana
+        </button>
       </div>
     </div>
   </header>
@@ -180,7 +188,7 @@
   </main>
 
   <footer class="app-footer">
-    <p>MajiHoshi · Etapa 1: Hiragana</p>
+    <p>MajiHoshi · Hiragana y Katakana</p>
     <p class="credits">
       Algunas ilustraciones del vocabulario:
       <a href="https://openmoji.org" target="_blank" rel="noopener noreferrer">OpenMoji</a>
